@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<title>Participants Editor</title>
+		<meta name="robots" content="all" />
+		<meta name="author" content="" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../media/css/geral.css" type="text/css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../media/css/shadowbox.css">
+		<!-- [if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<![endif] -->
+		<script src="../media/js/jquery-1.6.1.min.js"></script>
+		<script src="../media/js/validation.js"></script>
+		<script src="../media/js/jquery.validate.min.js"></script>
+		<script src="../media/js/shadowbox.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#formField').validate();
+			});
+			Shadowbox.init({
+				language: 'en',
+				players:  ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv']
+			});
+		</script>
+	</head>
+	<body>
+		<header id="header">
+			<nav id="breadcrumbs">
+				<ol>
+					<li><a href="/">Participants</a></li>
+					<li><a href="partners">Partners</a></li>
+					<li><a href="#">Edit</a></li>
+				</ol>
+			</nav>
+			<div id="menus">
+				<nav id="main-menu">
+					<ul>
+						<li><a class="home" href="/">Participants</a></li>
+						<li><a href="partners">Partners</a></li>
+						<li><a href="#">Edit</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div id="container">
+			<section id="form">
+			{% ifequal erro "noresults"%}
+				<h2>No Results</h2>
+			{% else %}
+				<br/>
+				<form class="val" id="formField" action="editpartners" method="post" accept-charset="utf-8">
+				<ul>
+					<li>
+						<label for="prov">Partners:</label>
+							<select name="prov" id="prov" style="width:270px;">
+								{% for partner in partners %}
+									<option value={{partner.key}}>{{partner.partner_name}}</option>
+								{% endfor %}
+							</select>
+							<br/>
+					</li>
+					<li>
+						<button type="submit" class="inputB" value="check">Check!</button>
+					</li>
+				</ul>
+				</form>
+				{% ifequal edit "yes"%}
+					<form class="val" id="formField" action="updatepartners?key={{partner.key}}" method="post" accept-charset="utf-8">
+					<fieldset>
+						<ul>
+							<li>
+								<label for="partnerkey">Partner Key:</label>
+								<input class="required" type="text" id="partnerkey" name="partnerkey" value="{{partner.partner_key}}">
+							</li>
+							<li>
+								<label for="partnername">Partner Name:</label>
+								<input class="required" type="text" id="partnername" name="partnername" value="{{partner.partner_name}}">
+							</li>
+							<li>
+								<label for="partnertype">Partner Type:</label>
+								<input class="required" type="text" id="partnertype" name="partnertype" value="{{partner.partner_type}}">
+							</li>
+							<li>
+								<label for="organization">Organization:</label>
+									<select name="org" id="org" style="width:270px;">
+									{% for org in organizations %}
+										{% ifequal org.name partner.organization%}
+											<option value="{{org.name}}" selected>{{org.name}}</option>
+										{% else %}
+											<option value="{{org.name}}">{{org.name}}</option>
+										{% endifequal %}
+									{% endfor %}
+									</select>
+								<a href="organizations" rel="shadowbox;height=500;width=980" title="Organization">
+									<img class="add" src="../media/images/add.png" alt="Add" />
+								</a>
+							</li>
+							<li>
+								<label for="contactperson">Contact Person:</label>
+									<select name="contact" id="contact" style="width:270px;">
+										{% for contact in contacts %}
+											<option>{{contact.first_name}} {{contact.last_name}}</option>
+										{% endfor %}
+											<option selected>{{partner.contact_person}}</option>
+									</select>
+								<a href="contacts" rel="shadowbox;height=500;width=980" title="Contact Person">
+									<img class="add" src="../media/images/add.png" alt="Add"/>
+								</a>
+							</li>
+							<li>
+								<label for="udescriptiontex">Description:</label>
+								<textarea name="udescriptiontex" id="udescriptiontex" rows="5" cols="30">{{partner.description}}</textarea>
+							</li>
+							<li>
+								<button type="submit" class="inputB" value="update">UPDATE &rarr;</button>
+								<a href="deletepartners?key={{partner.key}}">Delete</a>
+							</li>
+						</ul>
+					</fieldset>
+					</form>
+					{% endifequal %}
+			</section>
+			{% endifequal %}
+		</div>
+		<footer id="footer">
+			<p>&copy; 2011. Participants Editor. G10.</p>
+		</footer>
+	</body>
+</html>

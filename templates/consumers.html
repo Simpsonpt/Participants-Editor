@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<title>Participants Editor</title>
+		<meta name="robots" content="all" />
+		<meta name="author" content="" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../media/css/geral.css" type="text/css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../media/css/shadowbox.css">
+		<!-- [if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<![endif] -->
+		<script src="../media/js/jquery-1.6.1.min.js"></script>
+		<script src="../media/js/validation.js"></script>
+		<script src="../media/js/jquery.validate.min.js"></script>
+		<script src="../media/js/shadowbox.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#formField').validate();
+			});
+			Shadowbox.init({
+				language: 'en',
+				players:  ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv']
+			});
+		</script>
+	</head>
+	<body>
+		<header id="header">
+			<nav id="breadcrumbs">
+				<ol>
+					<li><a href="/">Participants</a></li>
+					<li><a href="consumers">Consumers</a></li>
+				</ol>
+			</nav>
+			<div id="menus">
+				<nav id="main-menu">
+					<ul>
+						<li><a class="home" href="/">Participants</a></li>
+						<li><a href="providers">Providers</a></li>
+						<li><a href="consumers">Consumers</a></li>
+						<li><a href="partners">Partners</a></li>
+					</ul>
+				</nav>
+				<nav id="sec-menu">
+					<ul>
+						<li><a href="editconsumers" rel="shadowbox;height=500;width=980">Available Consumers</a></li>
+						<li><a href="organizations">Organizations</a></li>
+						<li><a href="contacts">Contacts</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div id="container">
+			<section id="form">
+				<form class="val" action="addconsumers" id="formField" method="post">
+					<fieldset>
+						<ul>
+							<li>
+								<label for="profilename"><span>*</span> Profile Name:</label>
+								<input class="required" type="text" id="profilename" name="profilename" placeholder="Type a Profile name">
+							</li>
+							<li>
+								<label for="problemdefinition"><span>*</span> Problem Definition:</label>
+								<input class="required" type="text" id="problemdefinition" name="problemdefinition" placeholder="">
+							</li>
+							<li>
+								<label for="goaldefinition"><span>*</span> Goal Definition:</label>
+								<input class="required" id="goaldefinition" name="goaldefinition" placeholder="">
+							</li>
+							<li>
+								<label for="udescription">Description:</label>
+								<input class="udescription" type="checkbox" id="udescription" name="udescription">
+							</li>
+							<li>
+								<textarea id="udescriptiontext" name="udescriptiontex" rows="5" cols="30" placeholder="Type a description about the provider. ex: Provider information, keywords, language."></textarea>
+							</li>
+							<li>
+								<button type="submit" class="inputB" value="Save">Save</button>
+								<a class="cancel" href="/"> | Cancel</a>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</section>
+		</div>
+		<footer id="footer">
+			<p>&copy; 2011. Participants Editor. G10.</p>
+		</footer>
+	</body>
+</html>

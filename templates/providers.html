@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<title>Participants Editor</title>
+		<meta name="robots" content="all" />
+		<meta name="author" content="" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../media/css/geral.css" type="text/css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../media/css/shadowbox.css">
+		<!-- [if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<![endif] -->
+		<script src="../media/js/jquery-1.6.1.min.js"></script>
+		<script src="../media/js/validation.js"></script>
+		<script src="../media/js/jquery.validate.min.js"></script>
+		<script src="../media/js/shadowbox.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#formField').validate();
+			});
+			Shadowbox.init({
+				language: 'en',
+				players:  ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv']
+			});
+		</script>
+	</head>
+	<body>
+		<header id="header">
+			<nav id="breadcrumbs">
+				<ol>
+					<li><a href="/">Participants</a></li>
+					<li><a href="providers">Providers</a></li>
+				</ol>
+			</nav>
+			<div id="menus">
+			<nav id="main-menu">
+				<ul>
+					<li><a class="home" href="/">Participants</a></li>
+					<li><a href="providers">Providers</a></li>
+					<li><a href="consumers">Consumers</a></li>
+					<li><a href="partners">Partners</a></li>
+				</ul>
+			</nav>
+			<nav id="sec-menu">
+				<ul>
+					<li><a href="organizations">Organizations</a></li>
+					<li><a href="contacts">Contacts</a></li>
+				</ul>
+			</nav>
+		</div>
+		</header>
+		<div id="container">
+			<section id="form">
+				<form class="val" action="addproviders" id="formField" method="post">
+					<fieldset>
+						<ul>
+							<li>
+								<label for="providerkey">Provider Key <span>*</span></label>
+								<input class="required" type="text" id="providerkey" name="providerkey" placeholder="Type a valid key">
+							</li>
+							<li>
+								<label for="providername">Provider Name <span>*</span></label>
+								<input class="required" type="text" id="providername" name="providername" placeholder="Type a Provider name">
+							</li>
+							<li>
+								<label for="organization">Organization</label>
+									<input name="org" id="org" style="width:250px;" list="lorg">
+									<datalist id="lorg">
+									{% for org in organizations %}
+										<option value="{{org.name}}">{{org.name}}</option>
+									{% endfor %}
+									</datalist>
+								<a class="add" href="editorganizations" rel="shadowbox;height=500;width=980" title="Organization">Add</a>
+							</li>
+							<li>
+								<label for="contactperson">Contact Person</label>
+									<input name="contact" id="contact" style="width:250px;" list="cp"/>
+									<datalist id="cp">
+										{% for contact in contacts %}
+											<option>{{contact.first_name}} {{contact.last_name}}</option>
+										{% endfor %}
+									</datalist>
+								<a class="add" href="editcontacts" rel="shadowbox;height=500;width=980" title="Contact Person">Add</a>
+							</li>
+							<li>
+								<label for="udescription">Description</label>
+								<input class="udescription" type="checkbox" id="udescription" name="udescription">
+							</li>
+							<li>
+								<textarea id="udescriptiontext" name="udescriptiontext" rows="5" cols="30" placeholder="Type a description about the provider. ex: Provider information, keywords, language."></textarea>
+							</li>
+							<li>
+								<button type="submit" class="inputB" value="Save">Save</button>
+								<span>| </span><a class="cancel" href="/">Cancel</a>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</section>
+			<section id="info">
+				<div id="buttons">
+					<span><a class="provls" href="editproviders" rel="shadowbox;height=500;width=980">Providers List</a></span>
+					<span><a class="getxml" href="/xml?kind=providers">Get XML file</a></span>
+				</div>
+				<div id="tips">
+					<h2>Information</h2>
+					<p>This is a paragraph</p>
+				</div>
+			</section>
+		</div>
+		<footer id="footer">
+			<p>&copy; 2011. Participants Editor. G10.</p>
+		</footer>
+	</body>
+</html>

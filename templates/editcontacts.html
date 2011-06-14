@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<title>Participants Editor</title>
+		<meta name="robots" content="all" />
+		<meta name="author" content="" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="../media/css/geral.css" type="text/css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../media/css/shadowbox.css">
+		<!-- [if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+		<![endif] -->
+		<script src="../media/js/jquery-1.6.1.min.js"></script>
+		<script src="../media/js/validation.js"></script>
+		<script src="../media/js/jquery.validate.min.js"></script>
+		<script src="../media/js/shadowbox.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#formField').validate();
+			});
+			Shadowbox.init({
+				language: 'en',
+				players:  ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv']
+			});
+		</script>
+	</head>
+	<body>
+		<header id="header">
+			<nav id="breadcrumbs">
+				<ol>
+					<li><a href="/">Participants</a></li>
+					<li><a href="contacts">Contacts</a></li>
+					<li><a href="#">Edit</a></li>
+				</ol>
+			</nav>
+			<div id="menus">
+				<nav id="main-menu">
+					<ul>
+						<li><a class="home" href="/">Participants</a></li>
+						<li><a href="contacts">Contacts</a></li>
+						<li><a href="#">Edit</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div id="container">
+			<section id="form">
+			{% ifequal erro "noresults"%}
+				<h2>No Results</h2>
+			{% else %}
+				<br/>
+				<form class="val" id="formField" action="editcontacts" method="post" accept-charset="utf-8">
+				<ul>
+					<li>
+						<label for="prov">Contacts:</label>
+							<input name="prov" id="prov" style="width:270px;" list="contact" placeholder="Type Contact Name"/>
+								<datalist id="contact">
+								{% for contact in contacts %}
+									<option value={{contact.key}}>{{contact.first_name}} {{contact.last_name}}</option>
+								{% endfor %}
+								</datalist>
+							<br/>
+					</li>
+					<li>
+						<button type="submit" class="inputB" value="check">Check!</button>
+					</li>
+				</ul>
+				</form>
+				{% ifequal edit "yes"%}
+					<form class="val" action="updatecontacts?key={{contact.key}}" id="formField" method="post">
+					<fieldset>
+						<ul>
+							<li>
+								<label for="firstname">First Name:</label>
+								<input class="required name" type="text" id="firstname" name="firstname" value="{{contact.first_name}}">
+							</li>
+							<li>
+								<label for="lastname">Last Name:</label>
+								<input class="required name" type="text" id="lastname" name="lastname" value="{{contact.last_name}}">
+							</li>
+							<li>
+								<label for="phone">Telephone:</label>
+								<input class="number" id="phone" name="phone" value="{{contact.telephone}}" required>
+							</li>
+							<li>
+								<label for="email">Email:</label>
+								<input class="required email" id="email" name="email" value="{{contact.email}}" reqeuired>
+							</li>
+							<li>
+								<button type="submit" class="inputB" value="update">UPDATE &rarr;</button>
+								<a href="deletecontacts?key={{contact.key}}">Delete</a>
+							</li>
+						</ul>
+					</fieldset>
+					</form>
+					{% endifequal %}
+			</section>
+			{% endifequal %}
+		</div>
+		<footer id="footer">
+			<p>&copy; 2011. Participants Editor. G10.</p>
+		</footer>
+	</body>
+</html>

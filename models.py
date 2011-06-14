@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+#
+# Participants Editor - DEI-FCTUC IHC 2011 
+#	
+# Developers:
+#	- Renato Rodrigues
+#	- Rui Molar
+#
 from google.appengine.ext import db
 from google.appengine.api import users
 

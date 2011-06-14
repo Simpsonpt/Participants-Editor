@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 #
-# Copyright 2007 Google Inc.
-#
 # Participants Editor - DEI-FCTUC IHC 2011 
 #	
 # Developers:
-#	- Diogo Balseiro
-#	- Flavio Guilherme
 #	- Renato Rodrigues
 #	- Rui Molar
 #
